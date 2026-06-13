@@ -1,0 +1,57 @@
+/* 战术UI全局定义 */
+:root {
+  --dark-bg: #050505;
+  --tactical-orange: #ffaa00;
+  --tactical-green: #00ff88;
+  --border-color: #2a2a2a;
+  --hud-text: rgba(255, 170, 0, 0.7);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--dark-bg);
+  color: #ffffff;
+  font-family: 'Inter', 'Orbitron', 'Microsoft YaHei', sans-serif;
+  overflow-x: hidden;
+}
+
+/* 模拟屏幕扫描线特效（覆盖全屏） */
+body::before {
+  content: ' ';
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 9999;
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+}
+
+/* 战术切角按钮通用类 */
+.t-btn {
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border: none;
+/* ---- 原有代码保持不变 ---- */
+
+/* 隐藏全局滚动条，打造无缝的高级战术终端体验 */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* 优化页面默认发光效果 */
+::selection {
+  background: var(--tactical-orange);
+  color: #000;
+}
+}

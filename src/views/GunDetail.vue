@@ -1,41 +1,35 @@
-<template>
-  <div class="detail-page" v-if="gunInfo">
-    <router-link to="/guns" class="back-link">← 返回仓库</router-link>
-    <div class="content">
-      <div class="info-box">
-        <span class="tag">{{ gunInfo.type }}</span>
-        <h1>{{ gunInfo.name }}</h1>
-        <div class="stats">
-          <div class="stat-item"><span>垂直后坐</span> <div class="bar"><div :style="{width: gunInfo.vRecoil + '%'}"></div></div></div>
-          <div class="stat-item"><span>水平后坐</span> <div class="bar"><div :style="{width: gunInfo.hRecoil + '%'}"></div></div></div>
-          <div class="stat-item"><span>有效射程</span> <strong>{{ gunInfo.range }}m</strong></div>
-        </div>
-        <p class="description">{{ gunInfo.desc }}</p>
-      </div>
-    </div>
-  </div>
-</template>
+/* 覆盖 GunDetail.vue 原有的相关样式 */
+.detail-title { font-size: 4rem; margin: 0; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+.detail-desc { color: #888; margin: 20px 0 50px; line-height: 1.6; border-left: 2px solid var(--tactical-orange); padding-left: 15px; }
 
-<script setup>
-import { computed } from 'vue';
-const props = defineProps(['id']);
+.stat-item { margin-bottom: 35px; }
+.stat-meta { display: flex; justify-content: space-between; font-size: 12px; color: #aaa; margin-bottom: 8px; font-family: 'Inter', sans-serif; letter-spacing: 1px; }
 
-const db = {
-  akm: { name: 'AKM', type: '突击步枪', vRecoil: 75, hRecoil: 60, range: 80, desc: '经典的苏系步枪，威力巨大但后坐力极难控制，是暗区老手的首选。' },
-  m4a1: { name: 'M4A1', type: '突击步枪', vRecoil: 40, hRecoil: 35, range: 90, desc: '北约制式武器，拥有极高的改装上限和射速。' }
-};
+/* 增加科技感的背景槽 */
+.stat-bar-bg { height: 4px; background: #111; border: 1px solid #222; position: relative; overflow: hidden; }
+/* 进度条的辉光与网格效果 */
+.stat-bar-fill { 
+  height: 100%; 
+  background: var(--tactical-orange); 
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 10px 100%;
+  box-shadow: 0 0 15px rgba(255,170,0,0.5); 
+  transition: width 1.2s cubic-bezier(0.1, 0.9, 0.2, 1); 
+}
 
-const gunInfo = computed(() => db[props.id] || db['akm']);
-</script>
-
-<style scoped>
-.detail-page { background: #0f0f0f; min-height: 100vh; padding: 60px; color: #fff; }
-.back-link { color: #888; text-decoration: none; margin-bottom: 20px; display: block; }
-.info-box { max-width: 600px; border-left: 4px solid #ffaa00; padding-left: 30px; }
-.tag { background: #333; padding: 4px 10px; font-size: 0.8rem; }
-.stats { margin: 30px 0; }
-.stat-item { margin-bottom: 15px; }
-.bar { height: 6px; background: #333; width: 200px; margin-top: 5px; }
-.bar div { height: 100%; background: #ffaa00; }
-.description { line-height: 1.6; color: #ccc; }
-</style>
+.blueprint-box { 
+  height: 400px; 
+  background: #050505; 
+  border: 1px solid #2a2a2a; 
+  position: relative; 
+  overflow: hidden; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  /* 添加类似雷达或蓝图的网格背景 */
+  background-image: 
+    linear-gradient(#111 1px, transparent 1px),
+    linear-gradient(90deg, #111 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.gun-name-bg { font-size: 8rem; font-weight: 900; color: #0a0a0a; transform: rotate(-10deg); user-select: none; }
